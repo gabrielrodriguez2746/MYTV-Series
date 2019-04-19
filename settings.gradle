@@ -1,1 +1,4 @@
-include ':app', ':base', ':baseui'
+include ':app'
+include ':base'
+include ':baseui'
+include ':tvnetwork'

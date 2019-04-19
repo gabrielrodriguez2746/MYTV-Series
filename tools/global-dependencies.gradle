@@ -40,4 +40,9 @@ ext {
     picassoVersion = "2.5.2"
     glideVersion = "3.7.0"
 
+    // Testing
+    junit5Version = '5.2.0'
+    mockkVersion = '1.9.2'
+    kotlinTestVersion = '3.2.1'
+
 }
