@@ -3,6 +3,8 @@ package com.mytv.series.di.component
 import com.mytv.series.base.InjectableApplication
 import com.mytv.series.base.di.component.BaseComponent
 import com.mytv.series.base.di.modules.AppModule
+import com.mytv.series.di.modules.AppActivityBuilder
+import com.mytv.series.di.modules.AppConfigurationModule
 import com.mytv.series.di.modules.NetworkModule
 import dagger.BindsInstance
 import dagger.Component
@@ -14,6 +16,7 @@ import javax.inject.Singleton
     modules = [
         AndroidSupportInjectionModule::class,
         AppConfigurationModule::class,
+        AppActivityBuilder::class,
         NetworkModule::class,
         AppModule::class
     ]
