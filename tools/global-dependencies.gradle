@@ -27,9 +27,12 @@ ext {
     okioVersion = "1.11.0"
 
     // Architecture components
-    archVersion = "1.1.1"
+    archVersion = "2.0.0"
     roomVersion = "2.1.0-alpha06"
     constraintLayoutVersion = "1.1.3"
+    pagingVersion = "2.1.0"
+    navigationVersion = "1.0.0"
+    recyclerViewVersion = "1.0.0"
 
     // Testing
     junit5Version = '5.2.0'

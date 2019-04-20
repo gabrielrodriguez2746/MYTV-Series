@@ -40,6 +40,8 @@ dependencies {
     implementation project(':topseries')
 
     implementation "androidx.appcompat:appcompat:$rootProject.ext.androidXVersion"
+    implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.ext.archVersion"
+    implementation "androidx.recyclerview:recyclerview:$rootProject.ext.recyclerViewVersion"
 
     //Dagger
     implementation "com.google.dagger:dagger-android:$rootProject.ext.daggerVersion"

@@ -3,6 +3,7 @@ package com.mytv.series.di.component
 import com.mytv.series.base.InjectableApplication
 import com.mytv.series.base.di.component.BaseComponent
 import com.mytv.series.base.di.modules.AppModule
+import com.mytv.series.base.di.modules.FactoryModule
 import com.mytv.series.di.modules.app.AppActivityBuilder
 import com.mytv.series.di.modules.app.AppConfigurationModule
 import com.mytv.series.di.modules.app.AppNetworkModule
@@ -17,6 +18,7 @@ import javax.inject.Singleton
         AndroidSupportInjectionModule::class,
         AppConfigurationModule::class,
         AppActivityBuilder::class,
+        FactoryModule::class,
         AppNetworkModule::class,
         AppModule::class
     ]

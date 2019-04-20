@@ -17,10 +17,12 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$rootProject.ext.kotlin_version"
+
+    implementation project(':common')
 
     // Support Libraries
     implementation "androidx.appcompat:appcompat:$rootProject.ext.androidXVersion"
+    implementation "androidx.paging:paging-runtime:$rootProject.ext.pagingVersion"
 
 }

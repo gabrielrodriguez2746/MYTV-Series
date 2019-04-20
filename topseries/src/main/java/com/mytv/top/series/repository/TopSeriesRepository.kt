@@ -12,6 +12,7 @@ import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
+import io.reactivex.subjects.BehaviorSubject
 import javax.inject.Inject
 
 class TopSeriesRepository @Inject constructor(
@@ -20,12 +21,35 @@ class TopSeriesRepository @Inject constructor(
 ) :
     @JvmSuppressWildcards BaseRepository<Int, TVSeries> {
 
+    private val _cachedResults = mutableMapOf<Int, List<TVSeries>>()
+    private val cachedResults: Map<Int, List<TVSeries>> get() = _cachedResults
+    private val dataSubject = BehaviorSubject.createDefault<List<TVSeries>>(emptyList())
+
     override fun getSingleListData(parameters: Int): Single<List<TVSeries>> {
-        return getSingleResultsArray(parameters).flatMap { resultsArray -> processResponseItems(resultsArray).toList() }
+        return if (cachedResults.containsKey(parameters)) {
+            val pageResults = cachedResults.getValue(parameters)
+            if (pageResults.isEmpty()) {
+                getSingleResultsArray(parameters)
+                    .flatMap { resultsArray -> processResponseItems(resultsArray).toList() }
+                    .doOnSuccess {
+                        _cachedResults[parameters] = it
+                        dataSubject.onNext(cachedResults.flatMap { results -> results.value })
+                    }
+            } else {
+                Single.just(pageResults)
+            }
+        } else {
+            getSingleResultsArray(parameters)
+                .flatMap { resultsArray -> processResponseItems(resultsArray).toList() }
+                .doOnSuccess { _cachedResults[parameters] = it }
+        }
+
     }
 
-    override fun getObservableData(parameters: Int): Observable<TVSeries> {
-        return getSingleResultsArray(parameters).flatMapObservable(::processResponseItems)
+    override fun getObservableData(): Observable<TVSeries> {
+        return dataSubject.distinctUntilChanged()
+            .subscribeOn(Schedulers.computation())
+            .flatMap { Observable.fromIterable(it) }
     }
 
     override fun getCompletableData(): Completable {

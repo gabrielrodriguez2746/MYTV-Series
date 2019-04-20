@@ -11,7 +11,7 @@ interface BaseRepository<in T, R> {
 
     fun getSingleListData(parameters: T): Single<List<R>>
 
-    fun getObservableData(parameters: T): Observable<R>
+    fun getObservableData(): Observable<R>
 
     fun getCompletableData() : Completable
 }

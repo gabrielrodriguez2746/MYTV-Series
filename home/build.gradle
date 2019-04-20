@@ -19,6 +19,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
@@ -26,10 +30,16 @@ dependencies {
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     implementation project(':base')
+    implementation project(':baseui')
     implementation project(':data')
 
     implementation "androidx.appcompat:appcompat:$rootProject.ext.androidXVersion"
     implementation "androidx.constraintlayout:constraintlayout:$rootProject.ext.constraintLayoutVersion"
+    implementation "android.arch.navigation:navigation-fragment:$rootProject.ext.navigationVersion"
+    implementation "android.arch.navigation:navigation-ui-ktx:$rootProject.ext.navigationVersion"
+    implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.ext.archVersion"
+    implementation "androidx.recyclerview:recyclerview:$rootProject.ext.recyclerViewVersion"
+    implementation "androidx.paging:paging-runtime:$rootProject.ext.pagingVersion"
     
     // Rx
     implementation "io.reactivex.rxjava2:rxkotlin:$rootProject.ext.rxKotlinVersion"
