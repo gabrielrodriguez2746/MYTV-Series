@@ -1,9 +1,7 @@
-package com.mytv.series.base.keys
+package com.mytv.series.base.intents
 
 import androidx.appcompat.app.AppCompatActivity
 import kotlin.reflect.KClass
-
-const val HOME_ACTIVITY_KEY = "HOME_ACTIVITY_KEY"
 
 abstract class ActivityClassIntent {
 

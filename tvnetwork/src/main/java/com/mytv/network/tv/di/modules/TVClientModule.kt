@@ -2,8 +2,8 @@ package com.mytv.network.tv.di.modules
 
 import com.google.gson.Gson
 import com.mytv.network.tv.R
-import com.mytv.series.base.network.ConnectTimeOut
-import com.mytv.series.base.network.ReadTimeOut
+import com.mytv.series.base.di.ConnectTimeOut
+import com.mytv.series.base.di.ReadTimeOut
 import com.mytv.series.base.providers.ResourceProvider
 import dagger.Module
 import dagger.Provides
@@ -24,12 +24,12 @@ object TVClientModule {
     @JvmStatic
     fun provideClient(
         interceptors: @JvmSuppressWildcards Set<Interceptor>,
-        readTimeOut: ReadTimeOut,
-        connectTimeOut: ConnectTimeOut
+        @ReadTimeOut readTimeOut: Long,
+        @ConnectTimeOut connectTimeOut: Long
     ): OkHttpClient {
         return OkHttpClient.Builder().apply {
-            readTimeout(readTimeOut.timeOut, TimeUnit.SECONDS)
-            connectTimeout(connectTimeOut.timeOut, TimeUnit.SECONDS)
+            readTimeout(readTimeOut, TimeUnit.SECONDS)
+            connectTimeout(connectTimeOut, TimeUnit.SECONDS)
             interceptors.forEach { interceptor ->
                 addInterceptor(interceptor)
             }
