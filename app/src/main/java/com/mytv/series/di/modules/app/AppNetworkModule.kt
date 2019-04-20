@@ -1,10 +1,10 @@
-package com.mytv.series.di.modules
+package com.mytv.series.di.modules.app
 
 import com.mytv.network.tv.di.modules.TVClientModule
 import com.mytv.network.tv.di.modules.TVInterceptorsModule
+import com.mytv.series.base.di.ConnectTimeOut
+import com.mytv.series.base.di.ReadTimeOut
 import com.mytv.series.base.di.modules.BaseInterceptorModule
-import com.mytv.series.base.network.ConnectTimeOut
-import com.mytv.series.base.network.ReadTimeOut
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
@@ -16,20 +16,18 @@ import dagger.Reusable
         TVClientModule::class
     ]
 )
-object NetworkModule {
+object AppNetworkModule {
 
     @Reusable
     @Provides
     @JvmStatic
-    fun provideConnectTimeOut(): ConnectTimeOut {
-        return ConnectTimeOut(5)
-    }
+    @ConnectTimeOut
+    fun provideConnectTimeOut(): Long = 5
 
     @Reusable
     @Provides
     @JvmStatic
-    fun provideReadTimeOut(): ReadTimeOut {
-        return ReadTimeOut(5)
-    }
+    @ReadTimeOut
+    fun provideReadTimeOut(): Long = 5
 
 }

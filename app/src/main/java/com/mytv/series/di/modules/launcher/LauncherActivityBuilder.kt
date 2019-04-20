@@ -1,24 +1,24 @@
-package com.mytv.di
+package com.mytv.series.di.modules.launcher
 
 import androidx.appcompat.app.AppCompatActivity
 import com.mytv.home.HomeActivity
-import com.mytv.series.base.keys.ActivityClassIntent
-import com.mytv.series.base.keys.HOME_ACTIVITY_KEY
+import com.mytv.launcher.activities.SplashActivity
+import com.mytv.series.base.intents.ActivityClassIntent
 import dagger.Binds
 import dagger.Module
-import dagger.multibindings.IntoMap
-import dagger.multibindings.StringKey
+import dagger.android.ContributesAndroidInjector
 import javax.inject.Inject
 import kotlin.reflect.KClass
 
 @Module
-abstract class HomeActivityBuilder {
+abstract class LauncherActivityBuilder {
 
+    @ContributesAndroidInjector
+    abstract fun bindLauncherActivity(): SplashActivity
 
     @Binds
-    @IntoMap
-    @StringKey(HOME_ACTIVITY_KEY)
     abstract fun bindActivityClassIntent(activityClassIntent: HomeActivityClass): ActivityClassIntent
+
 }
 
 class HomeActivityClass @Inject constructor() : ActivityClassIntent() {

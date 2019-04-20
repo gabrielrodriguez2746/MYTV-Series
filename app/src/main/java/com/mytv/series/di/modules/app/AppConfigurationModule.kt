@@ -1,4 +1,4 @@
-package com.mytv.series.di.modules
+package com.mytv.series.di.modules.app
 
 import android.content.Context
 import com.mytv.series.BuildConfig
