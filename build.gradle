@@ -5,7 +5,7 @@ buildscript {
     repositories {
         google()
         jcenter()
-        
+
     }
     dependencies {
         apply from: "$project.rootDir/tools/global-dependencies.gradle"
@@ -19,7 +19,7 @@ allprojects {
     repositories {
         google()
         jcenter()
-        
+
     }
 }
 
@@ -27,4 +27,4 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
-apply from: "$project.rootDir/tools/global-dependencies.gradle"
+apply from: "$project.rootDir/tools/global-dependencies.gradle" 
