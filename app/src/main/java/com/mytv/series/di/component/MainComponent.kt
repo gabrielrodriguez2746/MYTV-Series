@@ -1,5 +1,6 @@
 package com.mytv.series.di.component
 
+import com.mytv.configuration.di.ConfigurationRepositoryModule
 import com.mytv.series.base.InjectableApplication
 import com.mytv.series.base.di.component.BaseComponent
 import com.mytv.series.base.di.modules.AppModule

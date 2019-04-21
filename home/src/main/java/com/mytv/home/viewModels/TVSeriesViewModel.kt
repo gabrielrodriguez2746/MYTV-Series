@@ -1,6 +1,5 @@
 package com.mytv.home.viewModels
 
-import android.util.Log
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LiveData
@@ -12,6 +11,7 @@ import androidx.paging.PageKeyedDataSource
 import androidx.paging.PagedList
 import com.mytv.data.models.TVSeries
 import com.mytv.home.models.TVSeriesWidgetModel
+import com.mytv.series.base.di.ActivityScope
 import com.mytv.series.base.di.ViewModelKey
 import com.mytv.series.base.mappers.BaseMapper
 import com.mytv.series.base.repositories.BaseRepository
@@ -31,7 +31,8 @@ import kotlin.reflect.KProperty
 
 class TVSeriesViewModel @Inject constructor(
     private val widgetMapper: @JvmSuppressWildcards BaseMapper<TVSeries, TVSeriesWidgetModel>,
-    private val repository: @JvmSuppressWildcards BaseRepository<Int, TVSeries>) :
+    private val repository: @JvmSuppressWildcards BaseRepository<Int, TVSeries>
+) :
     ViewModel(), LifecycleObserver {
 
     private val compositeDisposable = CompositeDisposable()
@@ -111,7 +112,7 @@ class TVSeriesViewModel @Inject constructor(
                 .subscribeBy {
                     dataController.map { tvSeries ->
                         if (tvSeries.id == it) {
-                            Log.d("GABRIEL", "I am just here")
+
                         }
                     }
                 }

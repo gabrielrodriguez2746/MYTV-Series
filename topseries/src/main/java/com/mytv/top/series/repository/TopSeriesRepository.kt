@@ -18,8 +18,7 @@ import javax.inject.Inject
 class TopSeriesRepository @Inject constructor(
     private val service: TopSeriesService,
     private val mapper: @JvmSuppressWildcards BaseMapper<JsonElement, TVSeries>
-) :
-    @JvmSuppressWildcards BaseRepository<Int, TVSeries> {
+) : @JvmSuppressWildcards BaseRepository<Int, TVSeries> {
 
     private val _cachedResults = mutableMapOf<Int, List<TVSeries>>()
     private val cachedResults: Map<Int, List<TVSeries>> get() = _cachedResults
