@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--Add api key in order to make the works-->
-    <string name="tv_api_key"></string>
+    <string name="tv_api_key">xxx</string>
 
 </resources>

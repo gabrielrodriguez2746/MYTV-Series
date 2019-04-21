@@ -1,0 +1,7 @@
+task updateApiKey {
+    doFirst {
+        ant.replaceregexp (file: "$project.rootDir/tvnetwork/src/main/res/values/api_keys.xml",
+                match: "$match", flags: 'g',
+                replace: "$key")
+    }
+}
