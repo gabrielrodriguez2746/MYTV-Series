@@ -1,5 +1,6 @@
 package com.mytv.home.viewModels
 
+import android.util.Log
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LiveData
@@ -10,7 +11,9 @@ import androidx.paging.LivePagedListBuilder
 import androidx.paging.PageKeyedDataSource
 import androidx.paging.PagedList
 import com.mytv.data.models.TVSeries
+import com.mytv.home.models.TVSeriesWidgetModel
 import com.mytv.series.base.di.ViewModelKey
+import com.mytv.series.base.mappers.BaseMapper
 import com.mytv.series.base.repositories.BaseRepository
 import com.mytv.series.base.ui.generics.RecyclerItem
 import dagger.Binds
@@ -20,17 +23,23 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.plusAssign
 import io.reactivex.rxkotlin.subscribeBy
+import io.reactivex.schedulers.Schedulers
+import io.reactivex.subjects.PublishSubject
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import kotlin.reflect.KProperty
 
-class TVSeriesViewModel @Inject constructor(private val repository: @JvmSuppressWildcards BaseRepository<Int, TVSeries>) :
+class TVSeriesViewModel @Inject constructor(
+    private val widgetMapper: @JvmSuppressWildcards BaseMapper<TVSeries, TVSeriesWidgetModel>,
+    private val repository: @JvmSuppressWildcards BaseRepository<Int, TVSeries>) :
     ViewModel(), LifecycleObserver {
-
 
     private val compositeDisposable = CompositeDisposable()
 
+    private val clickedItemSubject: PublishSubject<Int> = PublishSubject.create()
+
     private val dataController: PageKeyedDataSource<Int, TVSeries> by DataController()
-    private val dataFactory: DataSource.Factory<Int, RecyclerItem<TVSeries, String>> by DataFactory()
+    private val dataFactory: DataFactory by DataFactoryImpl()
     private val configuration: PagedList.Config
         get() {
             return PagedList.Config.Builder()
@@ -40,13 +49,22 @@ class TVSeriesViewModel @Inject constructor(private val repository: @JvmSuppress
                 .build()
         }
 
-    val itemsLiveData: LiveData<PagedList<RecyclerItem<TVSeries, String>>> by lazy {
-        LivePagedListBuilder<Int, RecyclerItem<TVSeries, String>>(dataFactory, configuration).build()
+    val itemsLiveData: LiveData<PagedList<RecyclerItem<TVSeriesWidgetModel, String>>> by lazy {
+        LivePagedListBuilder<Int, RecyclerItem<TVSeriesWidgetModel, String>>(dataFactory, configuration).build()
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+    fun onResume() {
+        dataFactory.registerToItemsChanges()
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
     fun onPause() {
         compositeDisposable.clear()
+    }
+
+    fun onFavoriteItemClicked(id: Int) {
+        clickedItemSubject.onNext(id)
     }
 
     inner class DataController : PageKeyedDataSource<Int, TVSeries>() {
@@ -71,26 +89,40 @@ class TVSeriesViewModel @Inject constructor(private val repository: @JvmSuppress
 
     }
 
-    inner class DataFactory : DataSource.Factory<Int, RecyclerItem<TVSeries, String>>() {
+    inner class DataFactoryImpl : DataFactory() {
 
-        override fun create(): DataSource<Int, RecyclerItem<TVSeries, String>> {
+        override fun create(): DataSource<Int, RecyclerItem<TVSeriesWidgetModel, String>> {
             return dataController.map {
-                object : RecyclerItem<TVSeries, String> {
+                object : RecyclerItem<TVSeriesWidgetModel, String> {
                     override fun getType(): Int = 1
                     override fun getId(): Int = it.id
                     override fun getComparator(): Any? = null
-                    override fun getContent(): TVSeries = it
+                    override fun getContent(): TVSeriesWidgetModel = widgetMapper.getFromElement(it)
                     override fun getDiffResolver(): String? = null
 
                 }
             }
         }
 
-        operator fun getValue(
-            thisRef: ViewModel,
-            property: KProperty<*>
-        ): DataSource.Factory<Int, RecyclerItem<TVSeries, String>> = this
+        override fun registerToItemsChanges() {
+            compositeDisposable += clickedItemSubject
+                .subscribeOn(Schedulers.computation())
+                .debounce(100, TimeUnit.MILLISECONDS)
+                .subscribeBy {
+                    dataController.map { tvSeries ->
+                        if (tvSeries.id == it) {
+                            Log.d("GABRIEL", "I am just here")
+                        }
+                    }
+                }
+        }
+
+        operator fun getValue(thisRef: ViewModel, property: KProperty<*>): DataFactory = this
     }
+}
+
+abstract class DataFactory : DataSource.Factory<Int, RecyclerItem<TVSeriesWidgetModel, String>>() {
+    abstract fun registerToItemsChanges()
 }
 
 
