@@ -87,4 +87,5 @@ lint/tmp/
 # lint/reports/
 
 # Local Files
-# tools/signing.properties
+tools/signing.properties
+tvnetwork/src/main/res/values/api_keys.xml
