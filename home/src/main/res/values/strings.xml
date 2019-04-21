@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="home.vote_average">Promedio de votos:</string>
+    <string name="home.popularity">Popularidad:</string>
+    <string name="home.origiunal_name">Nombre original:</string>
+</resources>
