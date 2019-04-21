@@ -1,13 +1,14 @@
 package com.mytv.series.di.modules.home
 
 import com.mytv.home.HomeActivity
-import com.mytv.top.series.di.modules.TopSeriesRepositoryModule
+import com.mytv.series.base.di.ActivityScope
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
 @Module
 abstract class HomeActivityBuilder {
 
-    @ContributesAndroidInjector(modules = [TopSeriesRepositoryModule::class])
+    @ActivityScope
+    @ContributesAndroidInjector(modules = [HomeFragmentBuilder::class])
     abstract fun bindHomeActivity(): HomeActivity
 }
