@@ -3,6 +3,7 @@ package com.mytv.home.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.OnLifecycleEvent
 import androidx.lifecycle.ViewModel
 import androidx.paging.DataSource
@@ -37,6 +38,9 @@ class TVSeriesViewModel @Inject constructor(
 
     private val clickedItemSubject: PublishSubject<Int> = PublishSubject.create()
 
+    private val _eventsLiveData = MutableLiveData<TvSeriesViewModelEvents>()
+    val eventsLiveData : LiveData<TvSeriesViewModelEvents> get() = _eventsLiveData
+
     private val dataController: PageKeyedDataSource<Int, TVSeries> by DataController()
     private val dataFactory: DataFactory by DataFactoryImpl()
     private val configuration: PagedList.Config
@@ -62,7 +66,7 @@ class TVSeriesViewModel @Inject constructor(
         compositeDisposable.clear()
     }
 
-    fun onFavoriteItemClicked(id: Int) {
+    fun onItemClicked(id: Int) {
         clickedItemSubject.onNext(id)
     }
 
@@ -107,16 +111,15 @@ class TVSeriesViewModel @Inject constructor(
             compositeDisposable += clickedItemSubject
                 .subscribeOn(Schedulers.computation())
                 .debounce(100, TimeUnit.MILLISECONDS)
-                .subscribeBy {
-                    dataController.map { tvSeries ->
-                        if (tvSeries.id == it) {
-
-                        }
-                    }
-                }
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeBy { _eventsLiveData.postValue(TvSeriesViewModelEvents.OnItemClicked(it)) }
         }
 
         operator fun getValue(thisRef: ViewModel, property: KProperty<*>): DataFactory = this
+    }
+
+    sealed class TvSeriesViewModelEvents {
+        class OnItemClicked(val id: Int) : TvSeriesViewModelEvents()
     }
 }
 

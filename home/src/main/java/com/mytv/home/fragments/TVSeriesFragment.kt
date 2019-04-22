@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -66,15 +67,19 @@ class TVSeriesFragment : Fragment() {
         configureRecyclerView(view.findViewById(R.id.rvTVSeries))
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
     @SuppressLint("CheckResult")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(TVSeriesViewModel::class.java)
-        imageLoader.init().onErrorComplete()
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
-                viewModel.itemsLiveData.observe(viewLifecycleOwner, Observer(itemsAdapter::submitList))
-            }
+        viewModel.itemsLiveData.observe(viewLifecycleOwner, Observer(itemsAdapter::submitList))
+        viewModel.eventsLiveData.observe(viewLifecycleOwner, Observer {
+            Toast.makeText(context, getString(R.string.home_detail_explanation), Toast.LENGTH_SHORT).show()
+        })
         activity?.lifecycle?.addObserver(viewModel)
     }
 
@@ -109,7 +114,7 @@ class TVSeriesFragment : Fragment() {
                 imageWidth,
                 imageConfiguration
             )
-
+            holderItemView.setOnClickListener { viewModel.onItemClicked(item.id) }
         }
 
         override fun updateBind(item: String) = Unit
