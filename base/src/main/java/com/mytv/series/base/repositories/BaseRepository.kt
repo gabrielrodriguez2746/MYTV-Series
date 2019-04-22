@@ -5,7 +5,7 @@ import io.reactivex.Observable
 import io.reactivex.Single
 
 /**
- * ase class for repositories, this for keep modules independent TODO Improve a lot, there will be unused methods
+ * Base class for repositories, this for keep modules independent TODO Improve a lot, there will be unused methods
  */
 interface BaseRepository<in T, R> {
 
@@ -14,4 +14,7 @@ interface BaseRepository<in T, R> {
     fun getObservableData(): Observable<R>
 
     fun getCompletableData() : Completable
+
+    @Throws(UninitializedPropertyAccessException::class)
+    fun getSyncData() : R
 }

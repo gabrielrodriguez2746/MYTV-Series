@@ -20,6 +20,7 @@ class MYTVSeriesApplication : InjectableApplication() {
             .build()
             .apply {
                 inject(this@MYTVSeriesApplication)
+                getImageLoader().init().onErrorComplete().subscribe()
             }
     }
 

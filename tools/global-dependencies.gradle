@@ -34,6 +34,9 @@ ext {
     navigationVersion = "1.0.0"
     recyclerViewVersion = "1.0.0"
 
+    // Picasso
+    picassoVersion ="2.71828"
+
     // Testing
     junit5Version = '5.2.0'
     mockkVersion = '1.9.2'

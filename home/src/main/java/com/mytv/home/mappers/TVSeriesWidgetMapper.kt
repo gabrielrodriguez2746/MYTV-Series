@@ -27,7 +27,7 @@ class TVSeriesWidgetMapper @Inject constructor(resourceProvider: ResourceProvide
 
     override fun getFromElement(element: TVSeries): TVSeriesWidgetModel {
         return with(element) {
-            TVSeriesWidgetModel(id, name, getVoteAverageSpannable(), getOriginalSpannable(), backdropPath)
+            TVSeriesWidgetModel(id, name, getVoteAverageSpannable(), getOriginalSpannable(), posterPath)
         }
     }
 
@@ -42,7 +42,7 @@ class TVSeriesWidgetMapper @Inject constructor(resourceProvider: ResourceProvide
                 ForegroundColorSpan(colorPrimaryDark)
             )
             .applySpans(
-                listOf(averageLastIndex, averageLastIndex + votePopularityHeaderLength),
+                listOf(averageLastIndex, averageLastIndex + votePopularityHeaderLength + 1),
                 styleSpan = StyleSpan(Typeface.BOLD)
             )
     }

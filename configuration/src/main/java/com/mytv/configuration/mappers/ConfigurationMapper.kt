@@ -18,6 +18,11 @@ class ConfigurationMapper @Inject constructor() : BaseMapper<JsonElement, Config
         val backdropImageConfiguration = imageConfigurationObject
             .getGenericOrDefault("backdrop_sizes", JsonArray())
             .map { it.asString }
-        return Configuration(baseUrl, backdropImageConfiguration)
+
+        val posterImageConfiguration = imageConfigurationObject
+            .getGenericOrDefault("poster_sizes", JsonArray())
+            .map { it.asString }
+
+        return Configuration(baseUrl, backdropImageConfiguration, posterImageConfiguration)
     }
 }

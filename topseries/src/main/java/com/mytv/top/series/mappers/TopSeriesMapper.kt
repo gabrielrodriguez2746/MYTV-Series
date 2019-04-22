@@ -7,6 +7,7 @@ import com.mytv.data.models.TVSeries
 import com.mytv.series.base.helpers.getGenericOrDefault
 import com.mytv.series.base.mappers.BaseMapper
 import com.mytv.top.series.helpers.getDefaultInvalidTVSeries
+import io.reactivex.Single
 import javax.inject.Inject
 
 class TopSeriesMapper @Inject constructor() : @JvmSuppressWildcards BaseMapper<JsonElement, TVSeries> {

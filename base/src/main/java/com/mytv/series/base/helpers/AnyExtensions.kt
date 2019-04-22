@@ -10,3 +10,11 @@ inline fun <T> tryOrDefault(f: () -> T, defaultValue: T): T {
         defaultValue
     }
 }
+
+inline fun tryOrPrintException(f: () -> Unit) {
+    return try {
+        f()
+    } catch (e: Exception) {
+        e.printStackTrace()
+    }
+}

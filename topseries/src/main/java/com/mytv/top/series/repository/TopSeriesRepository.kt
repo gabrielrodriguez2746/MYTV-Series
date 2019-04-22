@@ -55,6 +55,10 @@ class TopSeriesRepository @Inject constructor(
         return Completable.complete()
     }
 
+    override fun getSyncData(): TVSeries {
+        TODO("unused")
+    }
+
     internal fun processResponseItems(resultsArray: JsonArray): Observable<TVSeries> {
         return Observable.fromIterable(resultsArray)
             .map(mapper::getFromElement)

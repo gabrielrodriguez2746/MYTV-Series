@@ -13,10 +13,10 @@ class TVSeriesHorizontalItem @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
-    val imageViewSeries by lazy { findViewById<ImageView>(R.id.ivSeries) }
-    val textViewOriginaName by lazy { findViewById<TextView>(R.id.tvOriginalName) }
-    val textViewName by lazy { findViewById<TextView>(R.id.tvName) }
-    val textViewPopularity by lazy { findViewById<TextView>(R.id.tvPopularity) }
+    val imageViewSeries: ImageView by lazy { findViewById<ImageView>(R.id.ivSeries) }
+    val textViewOriginalName: TextView by lazy { findViewById<TextView>(R.id.tvOriginalName) }
+    val textViewName: TextView by lazy { findViewById<TextView>(R.id.tvName) }
+    val textViewPopularity: TextView by lazy { findViewById<TextView>(R.id.tvPopularity) }
 
     init {
         inflate(context, R.layout.item_horizontal_tv_series, this)

@@ -3,7 +3,7 @@ package com.mytv.series.base.mappers
 /**
  * Base class for mappers, avoid use gson directly to have more control mapping
  */
-interface BaseMapper<in R, out T> {
+interface BaseMapper<in R, T> {
 
     /**
      * Get a [T] object from [R] element

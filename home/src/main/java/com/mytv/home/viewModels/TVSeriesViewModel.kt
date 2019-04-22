@@ -11,7 +11,6 @@ import androidx.paging.PageKeyedDataSource
 import androidx.paging.PagedList
 import com.mytv.data.models.TVSeries
 import com.mytv.home.models.TVSeriesWidgetModel
-import com.mytv.series.base.di.ActivityScope
 import com.mytv.series.base.di.ViewModelKey
 import com.mytv.series.base.mappers.BaseMapper
 import com.mytv.series.base.repositories.BaseRepository
@@ -32,8 +31,7 @@ import kotlin.reflect.KProperty
 class TVSeriesViewModel @Inject constructor(
     private val widgetMapper: @JvmSuppressWildcards BaseMapper<TVSeries, TVSeriesWidgetModel>,
     private val repository: @JvmSuppressWildcards BaseRepository<Int, TVSeries>
-) :
-    ViewModel(), LifecycleObserver {
+) : ViewModel(), LifecycleObserver {
 
     private val compositeDisposable = CompositeDisposable()
 
