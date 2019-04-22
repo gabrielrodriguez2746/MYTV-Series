@@ -12,9 +12,9 @@ abstract class TopSeriesApiModule {
 
     @Binds
     @Reusable
-    abstract fun bindPopularService(service: TopSeriesSeriesImpl): TopSeriesService
+    abstract fun bindPopularService(service: TopSeriesServiceImpl): TopSeriesService
 
 }
 
-class TopSeriesSeriesImpl @Inject constructor(retrofit: Retrofit) :
+class TopSeriesServiceImpl @Inject constructor(retrofit: Retrofit) :
     TopSeriesService by retrofit.create(TopSeriesService::class.java)

@@ -32,6 +32,7 @@ dependencies {
     implementation project(':base')
     implementation project(':baseui')
     implementation project(':data')
+    implementation project(':configuration')
 
     implementation "androidx.appcompat:appcompat:$rootProject.ext.androidXVersion"
     implementation "androidx.constraintlayout:constraintlayout:$rootProject.ext.constraintLayoutVersion"

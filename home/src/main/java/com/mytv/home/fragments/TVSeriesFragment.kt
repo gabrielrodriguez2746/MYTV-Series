@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
-import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -73,6 +72,7 @@ class TVSeriesFragment : Fragment() {
 
         override fun getViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             return TVSeriesViewHolder(TVSeriesHorizontalItem(parent.context).apply {
+                isClickable = true
                 layoutParams = ViewGroup.LayoutParams(MATCH_PARENT, itemHeight)
                 addRippleForeground()
             })

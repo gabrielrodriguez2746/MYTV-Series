@@ -8,7 +8,6 @@ import dagger.android.ContributesAndroidInjector
 @Module
 abstract class HomeActivityBuilder {
 
-    @ActivityScope
     @ContributesAndroidInjector(modules = [HomeFragmentBuilder::class])
     abstract fun bindHomeActivity(): HomeActivity
 }
