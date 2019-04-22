@@ -19,7 +19,7 @@ class TVSeriesWidgetMapper @Inject constructor(resourceProvider: ResourceProvide
 
     private val voteAverageHeader = resourceProvider.getString(R.string.home_vote_average)
     private val votePopularityHeader = resourceProvider.getString(R.string.home_popularity)
-    private val originalNameHeader = resourceProvider.getString(R.string.home_origiunal_name)
+    private val originalNameHeader = resourceProvider.getString(R.string.home_original_name)
 
     private val voteAverageHeaderLength = voteAverageHeader.length
     private val votePopularityHeaderLength = votePopularityHeader.length
