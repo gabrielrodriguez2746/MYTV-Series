@@ -39,14 +39,16 @@ class ConfigurationMapperTest {
     fun getDefaultValidConfiguration(): Configuration {
         return Configuration(
             baseUrl = "https://image.tmdb.org/t/p/",
-            backdropImageConfiguration = listOf("w300", "w780", "w1280", "original")
+            backdropImageConfiguration = listOf("w300", "w780", "w1280", "original"),
+            posterImageConfiguration = listOf("w92", "w154", "w185", "w342", "w500", "w780", "original")
         )
     }
 
     fun getDefaultInValidConfiguration(): Configuration {
         return Configuration(
             baseUrl = "https://image.tmdb.org/t/p/",
-            backdropImageConfiguration = listOf()
+            backdropImageConfiguration = listOf(),
+            posterImageConfiguration = listOf()
         )
     }
 

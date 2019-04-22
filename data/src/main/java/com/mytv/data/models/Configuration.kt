@@ -10,4 +10,6 @@ data class Configuration(
     @PrimaryKey
     val baseUrl: String,
     @ColumnInfo(name = "backdrop_image_configuration")
-    val backdropImageConfiguration: List<String>)
+    val backdropImageConfiguration: List<String>,
+    @ColumnInfo(name = "poster_image_configuration")
+    val posterImageConfiguration: List<String>)
