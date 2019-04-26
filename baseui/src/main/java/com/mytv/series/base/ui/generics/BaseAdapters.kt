@@ -10,22 +10,22 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mytv.common.biLet
 
 abstract class BasePagedListAdapter<T : RecyclerItem<*, *>> :
-    PagedListAdapter<T, RecyclerView.ViewHolder>(RecyclerItemDiffCallback<T>()) {
+    PagedListAdapter<T, ViewHolder<*,*>>(RecyclerItemDiffCallback<T>()) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder<*,*> {
         return getViewHolder(parent, viewType)
     }
 
     @Suppress("UNCHECKED_CAST")
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (getItem(position)?.getContent() to holder as? Binder<Any, Any>).biLet { content, binder ->
+    override fun onBindViewHolder(holder: ViewHolder<*,*>, position: Int) {
+        (getItem(position)?.getContent() to holder as? ViewHolder<Any, Any>).biLet { content, binder ->
             binder.bind(content)
         }
     }
 
     @Suppress("UNCHECKED_CAST")
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int, payloads: MutableList<Any>) {
-        (payloads.firstOrNull() to holder as? Binder<Any, Any>).biLet { changes, binder ->
+    override fun onBindViewHolder(holder: ViewHolder<*,*>, position: Int, payloads: MutableList<Any>) {
+        (payloads.firstOrNull() to holder as? ViewHolder<Any,Any>).biLet { changes, binder ->
             binder.updateBind(changes)
         } ?: super.onBindViewHolder(holder, position, payloads)
     }
@@ -34,7 +34,7 @@ abstract class BasePagedListAdapter<T : RecyclerItem<*, *>> :
         return getItem(position)?.getType() ?: -1
     }
 
-    abstract fun getViewHolder(parent: ViewGroup, viewType: Int): ViewHolder
+    abstract fun getViewHolder(parent: ViewGroup, viewType: Int): ViewHolder<*, *>
 }
 
 interface RecyclerItem<out R, out S> {
@@ -43,10 +43,6 @@ interface RecyclerItem<out R, out S> {
     fun getComparator(): Any?
     fun getContent(): R
     fun getDiffResolver(): S?
-}
-
-abstract class ViewFactory {
-    abstract fun getView(parent: ViewGroup, viewType: Int): View
 }
 
 class RecyclerItemDiffCallback<T : RecyclerItem<*, *>> : DiffUtil.ItemCallback<T>() {
@@ -60,11 +56,8 @@ class RecyclerItemDiffCallback<T : RecyclerItem<*, *>> : DiffUtil.ItemCallback<T
     override fun getChangePayload(oldItem: T, newItem: T): Any? = newItem.getDiffResolver()
 }
 
-abstract class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
+abstract class ViewHolder<T: Any, R :Any>(view: View) : RecyclerView.ViewHolder(view) {
+    abstract fun bind(item: T)
 
-interface Binder<in T, in R> {
-
-    fun bind(item: T)
-
-    fun updateBind(item: R)
+    abstract fun updateBind(item: R)
 }
