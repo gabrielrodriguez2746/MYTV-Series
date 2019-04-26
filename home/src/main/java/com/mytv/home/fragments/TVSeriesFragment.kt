@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -23,14 +22,11 @@ import com.mytv.home.viewModels.TVSeriesViewModel
 import com.mytv.home.widget.TVSeriesHorizontalItem
 import com.mytv.series.base.images.BaseImageLoader
 import com.mytv.series.base.images.ImageConfigurationType
-import com.mytv.series.base.providers.ResourceProvider
 import com.mytv.series.base.ui.generics.BasePagedListAdapter
-import com.mytv.series.base.ui.generics.Binder
 import com.mytv.series.base.ui.generics.RecyclerItem
 import com.mytv.series.base.ui.generics.ViewHolder
 import com.mytv.series.base.ui.generics.addRippleForeground
 import dagger.android.support.AndroidSupportInjection
-import io.reactivex.android.schedulers.AndroidSchedulers
 import javax.inject.Inject
 
 class TVSeriesFragment : Fragment() {
@@ -91,7 +87,7 @@ class TVSeriesFragment : Fragment() {
 
     inner class TVSeriesAdapter : BasePagedListAdapter<RecyclerItem<TVSeriesWidgetModel, String>>() {
 
-        override fun getViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        override fun getViewHolder(parent: ViewGroup, viewType: Int): ViewHolder<*, *> {
             return TVSeriesViewHolder(TVSeriesHorizontalItem(parent.context).apply {
                 isClickable = true
                 layoutParams = ViewGroup.LayoutParams(MATCH_PARENT, itemHeight)
@@ -100,8 +96,8 @@ class TVSeriesFragment : Fragment() {
         }
     }
 
-    inner class TVSeriesViewHolder(private val holderItemView: TVSeriesHorizontalItem) : ViewHolder(holderItemView),
-        Binder<TVSeriesWidgetModel, String> {
+    inner class TVSeriesViewHolder(private val holderItemView: TVSeriesHorizontalItem) :
+        ViewHolder<TVSeriesWidgetModel, String>(holderItemView) {
 
         override fun bind(item: TVSeriesWidgetModel) {
             holderItemView.textViewName.text = item.name
