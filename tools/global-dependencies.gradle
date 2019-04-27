@@ -7,6 +7,13 @@ ext {
     buildToolsVersion = '28.0.3'
     gradleBuildToolsVersion = '3.4.0'
 
+    // Internal
+    mytvBaseVersion = '1.0.0@aar'
+    mytvBaseTestVersion = '1.0.0@aar'
+    mytvBaseUiVersion = '1.0.0@aar'
+    mytvCommonVersion = '1.0.0@aar'
+    mytvDataVersion = '1.0.0@aar'
+
     // Kotlin
     kotlin_version = '1.3.30'
 
