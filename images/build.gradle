@@ -36,8 +36,8 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    implementation project(':base')
-    implementation project(':data')
+    implementation "com.mytvseries:base:$rootProject.ext.mytvBaseVersion"
+    implementation "com.mytvseries:data:$rootProject.ext.mytvDataVersion"
 
     // Dagger
     implementation "com.google.dagger:dagger-android:$rootProject.ext.daggerVersion"

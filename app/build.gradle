@@ -32,9 +32,10 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    implementation project(':base')
-    implementation project(':data')
-    implementation project(':baseui')
+    implementation "com.mytvseries:base:$rootProject.ext.mytvBaseVersion"
+    implementation "com.mytvseries:data:$rootProject.ext.mytvDataVersion"
+    implementation "com.mytvseries:baseui:$rootProject.ext.mytvBaseUiVersion"
+
     implementation project(':tvnetwork')
     implementation project(':launcher')
     implementation project(':home')

@@ -20,7 +20,7 @@ gen_cache_key: &gen_cache_key
   run:
     name: Generate cache key
     command: |
-      ./checksum.sh /tmp/checksum.txt
+      ./scripts/checksum.sh /tmp/checksum.txt
 restore_cache: &restore_cache
   restore_cache:
     key: gradle-{{ checksum "/tmp/checksum.txt" }}
@@ -65,8 +65,8 @@ jobs:
       - run:
           name: Save test results
           command: |
-            ./move_results.sh *index.html test_html_results
-            ./move_results.sh [TEST]*[.xml] test_xml_results
+            ./scripts/move_results.sh *index.html test_html_results
+            ./scripts/move_results.sh [TEST]*[.xml] test_xml_results
           when: always
       - store_test_results:
           path: ~/test_html_results

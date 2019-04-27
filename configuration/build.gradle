@@ -37,9 +37,8 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    implementation project(':base')
-    implementation project(':data')
-    testImplementation project(':basetest')
+    implementation "com.mytvseries:base:$rootProject.ext.mytvBaseVersion"
+    implementation "com.mytvseries:data:$rootProject.ext.mytvDataVersion"
 
     // Dagger
     implementation "com.google.dagger:dagger-android:$rootProject.ext.daggerVersion"
@@ -55,6 +54,7 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.ext.okhttpVersion"
 
     // Test
+    testImplementation "com.mytvseries:basetest:$rootProject.ext.mytvBaseTestVersion"
     testImplementation "io.mockk:mockk:$rootProject.ext.mockkVersion"
     testImplementation "io.kotlintest:kotlintest-runner-junit4:$rootProject.ext.kotlinTestVersion"
     testImplementation "org.junit.jupiter:junit-jupiter-api:$rootProject.ext.junit5Version"

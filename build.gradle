@@ -5,7 +5,6 @@ buildscript {
     repositories {
         google()
         jcenter()
-
     }
     dependencies {
         apply from: "$project.rootDir/tools/global-dependencies.gradle"
@@ -19,7 +18,7 @@ allprojects {
     repositories {
         google()
         jcenter()
-
+        maven { url uri("$rootDir/libs/") }
     }
 }
 
