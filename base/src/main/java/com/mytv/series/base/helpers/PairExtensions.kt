@@ -1,4 +1,4 @@
-package com.mytv.common
+package com.mytv.series.base.helpers
 
 @Suppress("UNCHECKED_CAST")
 fun <T, U, R> Pair<T?, U?>.biLet(body: (T, U) -> R): R? {

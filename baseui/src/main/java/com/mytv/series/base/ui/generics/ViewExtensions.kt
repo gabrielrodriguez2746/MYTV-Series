@@ -1,12 +1,12 @@
 package com.mytv.series.base.ui.generics
 
+import android.os.Build
 import android.util.TypedValue
 import android.view.View
 import androidx.core.content.ContextCompat
-import com.mytv.common.isMarshmallow
 
 fun View.addRippleForeground() {
-    if (isMarshmallow()) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
         val outValue = TypedValue()
         context.theme.resolveAttribute(
             android.R.attr.selectableItemBackgroundBorderless, outValue, true)

@@ -3,6 +3,7 @@
 # is the artifact version
 # Example: sh scripts/generate-aar.sh base 1.0
 
+if [[ -d "libs/com/mytvseries/$1" ]]; then rm -Rf libs/com/mytvseries/$1; fi
 mkdir -p libs/com/mytvseries/$1/$2
 
 ./gradlew $1:aR

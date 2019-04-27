@@ -5,28 +5,26 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.mytv.common.biLet
 
 abstract class BasePagedListAdapter<T : RecyclerItem<*, *>> :
-    PagedListAdapter<T, ViewHolder<*,*>>(RecyclerItemDiffCallback<T>()) {
+    PagedListAdapter<T, ViewHolder<*, *>>(RecyclerItemDiffCallback<T>()) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder<*,*> {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder<*, *> {
         return getViewHolder(parent, viewType)
     }
 
     @Suppress("UNCHECKED_CAST")
-    override fun onBindViewHolder(holder: ViewHolder<*,*>, position: Int) {
-        (getItem(position)?.getContent() to holder as? ViewHolder<Any, Any>).biLet { content, binder ->
-            binder.bind(content)
+    override fun onBindViewHolder(holder: ViewHolder<*, *>, position: Int) {
+        getItem(position)?.getContent()?.let {
+            (holder as ViewHolder<Any, Any>).bind(it)
         }
     }
 
     @Suppress("UNCHECKED_CAST")
-    override fun onBindViewHolder(holder: ViewHolder<*,*>, position: Int, payloads: MutableList<Any>) {
-        (payloads.firstOrNull() to holder as? ViewHolder<Any,Any>).biLet { changes, binder ->
-            binder.updateBind(changes)
+    override fun onBindViewHolder(holder: ViewHolder<*, *>, position: Int, payloads: MutableList<Any>) {
+        payloads.firstOrNull()?.let {
+            (holder as ViewHolder<Any, Any>).updateBind(it)
         } ?: super.onBindViewHolder(holder, position, payloads)
     }
 
@@ -56,7 +54,7 @@ class RecyclerItemDiffCallback<T : RecyclerItem<*, *>> : DiffUtil.ItemCallback<T
     override fun getChangePayload(oldItem: T, newItem: T): Any? = newItem.getDiffResolver()
 }
 
-abstract class ViewHolder<T: Any, R :Any>(view: View) : RecyclerView.ViewHolder(view) {
+abstract class ViewHolder<T : Any, R : Any>(view: View) : RecyclerView.ViewHolder(view) {
     abstract fun bind(item: T)
 
     abstract fun updateBind(item: R)
