@@ -1,4 +1,4 @@
-package com.mytv.common
+package com.mytv.series.base.helpers
 
 import io.kotlintest.shouldBe
 import org.junit.jupiter.api.Nested
