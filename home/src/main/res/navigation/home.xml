@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home"
+    app:startDestination="@id/destination_series">
+
+    <fragment
+        android:id="@+id/destination_series"
+        android:name="com.mytv.home.fragments.TVSeriesFragment"
+        android:label="@string/home.home_series"
+        tools:layout="@layout/fragment_tvseries" />
+    <fragment
+        android:id="@+id/destination_favorites"
+        android:name="com.mytv.home.fragments.FavoritesFragment"
+        android:label="@string/home.home_favorites"
+        tools:layout="@layout/fragment_favorites_series" />
+</navigation>
