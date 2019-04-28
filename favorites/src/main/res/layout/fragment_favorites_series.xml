@@ -10,7 +10,7 @@
         android:layout_height="0dp"
         android:gravity="center"
         android:padding="@dimen/space_medium"
-        android:text="@string/home.favorites_explanation"
+        android:text="@string/favorites.favorites_explanation"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

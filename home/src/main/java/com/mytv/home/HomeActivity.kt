@@ -1,7 +1,6 @@
 package com.mytv.home
 
 import android.os.Bundle
-import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -20,6 +19,9 @@ class HomeActivity : AppCompatActivity(), HasSupportFragmentInjector {
     @Inject
     lateinit var fragmentInjector: DispatchingAndroidInjector<Fragment>
 
+    @Inject
+    lateinit var navigationMap: @JvmSuppressWildcards Map<Int, Int>
+
     private lateinit var navController: NavController
 
     private val isNavControllerInitialized: Boolean get() = ::navController.isInitialized
@@ -29,28 +31,19 @@ class HomeActivity : AppCompatActivity(), HasSupportFragmentInjector {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
+        val navigationList: List<Int> = List(navigationMap.size) {
+            navigationMap.getValue(it)
+        }
+
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bnHome)
         bottomNavigationView.setupWithNavController(
-            listOf(R.navigation.home),
+            navigationList,
             supportFragmentManager,
-            R.id.flNavController,
-            intent
+            R.id.flNavController
         ).observe(this, Observer { navController ->
             setupActionBarWithNavController(navController)
             this.navController = navController
         })
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        // TODO For other release
-//        menuInflater.inflate(R.menu.menu_toolbar, menu)
-        return true
-    }
-
-    override fun onBackPressed() {
-        if (isNavControllerInitialized && !navController.popBackStack()) {
-            super.onBackPressed()
-        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

@@ -36,8 +36,7 @@ import com.mytv.series.base.ui.R
 fun BottomNavigationView.setupWithNavController(
     navGraphIds: List<Int>,
     fragmentManager: FragmentManager,
-    containerId: Int,
-    intent: Intent
+    containerId: Int
 ): LiveData<NavController> {
 
     // Map of tags
@@ -135,9 +134,6 @@ fun BottomNavigationView.setupWithNavController(
     // Optional: on item reselected, pop back stack to the destination of the graph
     setupItemReselected(graphIdToTagMap, fragmentManager)
 
-    // Handle deep link
-    setupDeepLinks(navGraphIds, fragmentManager, containerId, intent)
-
     // Finally, ensure that we update our BottomNavigationView when the back stack changes
     fragmentManager.addOnBackStackChangedListener {
         if (!isOnFirstFragment && !fragmentManager.isOnBackStack(firstFragmentTag)) {
@@ -153,29 +149,6 @@ fun BottomNavigationView.setupWithNavController(
         }
     }
     return selectedNavController
-}
-
-private fun BottomNavigationView.setupDeepLinks(
-    navGraphIds: List<Int>,
-    fragmentManager: FragmentManager,
-    containerId: Int,
-    intent: Intent
-) {
-    navGraphIds.forEachIndexed { index, navGraphId ->
-        val fragmentTag = getFragmentTag(index)
-
-        // Find or create the Navigation host fragment
-        val navHostFragment = obtainNavHostFragment(
-            fragmentManager,
-            fragmentTag,
-            navGraphId,
-            containerId
-        )
-        // Handle Intent
-        if (navHostFragment.navController.handleDeepLink(intent)) {
-            this.selectedItemId = navHostFragment.navController.graph.id
-        }
-    }
 }
 
 private fun BottomNavigationView.setupItemReselected(
