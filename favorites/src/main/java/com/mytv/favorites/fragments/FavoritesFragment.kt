@@ -1,11 +1,11 @@
-package com.mytv.home.fragments
+package com.mytv.favorites.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.mytv.home.R
+import com.mytv.favorites.R
 
 class FavoritesFragment : Fragment() {
 

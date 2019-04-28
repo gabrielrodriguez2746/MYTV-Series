@@ -42,6 +42,7 @@ dependencies {
     implementation project(':topseries')
     implementation project(':configuration')
     implementation project(':images')
+    implementation project(':favorites')
 
     implementation "androidx.appcompat:appcompat:$rootProject.ext.androidXVersion"
     implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.ext.archVersion"

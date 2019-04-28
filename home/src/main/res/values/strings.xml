@@ -9,7 +9,5 @@
     <string name="home.menu_label_list">Agrupar como listas</string>
     <string name="home.menu_label_grid">Agrupar como grilla</string>
     <string name="home.home_series">Top Series</string>
-    <string name="home.home_favorites">Favoritos</string>
-    <string name="home.favorites_explanation">Estamos trabajando para que puedas ver tus favoritos en esta sección</string>
     <string name="home.detail_explanation">Estamos trabajando para que puedas ver el detalle de tu serie</string>
 </resources>
