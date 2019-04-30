@@ -8,7 +8,7 @@ ext {
     gradleBuildToolsVersion = '3.4.0'
 
     // Internal
-    mytvBaseVersion = '1.0.1@aar'
+    mytvBaseVersion = '1.1.0@aar'
     mytvBaseTestVersion = '1.0.0@aar'
     mytvBaseUiVersion = '1.1.0@aar'
     mytvCommonVersion = '1.0.0@aar'

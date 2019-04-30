@@ -9,6 +9,6 @@
     <fragment
         android:id="@+id/destination_favorites"
         android:name="com.mytv.favorites.fragments.FavoritesFragment"
-        android:label="@string/favorites.home_favorites"
+        android:label="@string/app.home_favorites"
         tools:layout="@layout/fragment_favorites_series" />
 </navigation>

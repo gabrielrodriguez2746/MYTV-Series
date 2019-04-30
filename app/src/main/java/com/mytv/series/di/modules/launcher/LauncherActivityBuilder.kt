@@ -1,7 +1,7 @@
 package com.mytv.series.di.modules.launcher
 
 import androidx.appcompat.app.AppCompatActivity
-import com.mytv.home.HomeActivity
+import com.mytv.series.MainActivity
 import com.mytv.launcher.activities.SplashActivity
 import com.mytv.series.base.intents.ActivityClassIntent
 import dagger.Binds
@@ -22,5 +22,5 @@ abstract class LauncherActivityBuilder {
 }
 
 class HomeActivityClass @Inject constructor() : ActivityClassIntent() {
-    override fun getClassIntent(): @JvmSuppressWildcards KClass<out AppCompatActivity> = HomeActivity::class
+    override fun getClassIntent(): @JvmSuppressWildcards KClass<out AppCompatActivity> = MainActivity::class
 }

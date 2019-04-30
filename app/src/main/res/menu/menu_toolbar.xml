@@ -4,12 +4,12 @@
     <item
         android:id="@+id/destination_series"
         android:icon="@drawable/ic_list"
-        android:title="@string/home.menu_label_list"
+        android:title="@string/app.menu_label_list"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/destination_series_grid"
         android:icon="@drawable/ic_grid"
-        android:title="@string/home.menu_label_grid"
+        android:title="@string/app.menu_label_grid"
         app:showAsAction="ifRoom" />
 </menu>
