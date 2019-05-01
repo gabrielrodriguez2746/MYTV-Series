@@ -29,5 +29,4 @@ object AppNetworkModule {
     @JvmStatic
     @ReadTimeOut
     fun provideReadTimeOut(): Long = 5
-
 }

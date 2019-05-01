@@ -60,7 +60,5 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector, OnFragment
             }
             else -> Unit
         }
-
     }
-
 }

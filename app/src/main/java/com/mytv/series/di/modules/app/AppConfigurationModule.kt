@@ -32,5 +32,4 @@ class AppResourceProvider @Inject constructor(private val context: Context) : Re
     override fun getStringArray(id: Int): Array<String> = context.resources.getStringArray(id)
 
     override fun getColor(id: Int): Int = ContextCompat.getColor(context, id)
-
 }

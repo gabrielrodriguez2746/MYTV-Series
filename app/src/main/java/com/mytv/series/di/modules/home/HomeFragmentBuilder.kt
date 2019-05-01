@@ -18,5 +18,4 @@ abstract class HomeFragmentBuilder {
     )
     @ActivityScope
     abstract fun bindTVSeriesFragment(): TVSeriesFragment
-
 }

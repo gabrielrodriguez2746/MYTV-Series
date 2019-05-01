@@ -9,5 +9,4 @@ abstract class HomeActivityBuilder {
 
     @ContributesAndroidInjector(modules = [HomeFragmentBuilder::class])
     abstract fun bindHomeActivity(): MainActivity
-
 }

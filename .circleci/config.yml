@@ -77,6 +77,17 @@ jobs:
       - store_artifacts:
           path: ~/test_xml_results
 
+  ktlint:
+    <<: *config_android
+    steps:
+      - checkout
+      - <<: *attach_workspace
+      - <<: *gen_cache_key
+      - <<: *restore_cache
+      - run:
+          name: Run Ktlint analyzer
+          command: ./gradlew ktlint
+
 workflows:
   version: 2
   check:
@@ -88,5 +99,8 @@ workflows:
                 - master
                 - /release*/
       - unit_tests:
+          requires:
+            - config_cache
+      - ktlint:
           requires:
             - config_cache
