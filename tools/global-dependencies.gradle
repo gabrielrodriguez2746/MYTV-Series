@@ -6,6 +6,7 @@ ext {
     targetSdkVersion = 28
     buildToolsVersion = '28.0.3'
     gradleBuildToolsVersion = '3.4.0'
+    ktlintVersion = '0.29.0'
 
     // Internal
     mytvBaseVersion = '1.1.0@aar'

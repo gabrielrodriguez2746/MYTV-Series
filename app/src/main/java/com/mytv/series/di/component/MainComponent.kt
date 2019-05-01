@@ -37,5 +37,4 @@ interface MainComponent : BaseComponent {
         @BindsInstance
         fun application(application: InjectableApplication): Builder
     }
-
 }

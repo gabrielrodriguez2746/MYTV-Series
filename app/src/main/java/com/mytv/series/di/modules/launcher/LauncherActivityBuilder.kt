@@ -18,7 +18,6 @@ abstract class LauncherActivityBuilder {
 
     @Binds
     abstract fun bindActivityClassIntent(activityClassIntent: HomeActivityClass): ActivityClassIntent
-
 }
 
 class HomeActivityClass @Inject constructor() : ActivityClassIntent() {

@@ -23,5 +23,4 @@ class MYTVSeriesApplication : InjectableApplication() {
                 getImageLoader().init().onErrorComplete().subscribe()
             }
     }
-
 }
