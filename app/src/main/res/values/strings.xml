@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">MYTV Series</string>
+    <string name="app.home_label">Home</string>
+    <string name="app.favorites_label">Favoritos</string>
+    <string name="app.menu_label_list">Agrupar como listas</string>
+    <string name="app.menu_label_grid">Agrupar como grilla</string>
+    <string name="app.home_series">Top Series</string>
+    <string name="app.home_favorites">Favoritos</string>
 </resources>

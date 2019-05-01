@@ -38,9 +38,6 @@ class TVSeriesViewModel @Inject constructor(
 
     private val clickedItemSubject: PublishSubject<Int> = PublishSubject.create()
 
-    private val _eventsLiveData = MutableLiveData<TvSeriesViewModelEvents>()
-    val eventsLiveData : LiveData<TvSeriesViewModelEvents> get() = _eventsLiveData
-
     private val dataController: PageKeyedDataSource<Int, TVSeries> by DataController()
     private val dataFactory: DataFactory by DataFactoryImpl()
     private val configuration: PagedList.Config
@@ -112,14 +109,12 @@ class TVSeriesViewModel @Inject constructor(
                 .subscribeOn(Schedulers.computation())
                 .debounce(100, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeBy { _eventsLiveData.postValue(TvSeriesViewModelEvents.OnItemClicked(it)) }
+                .subscribeBy {
+                    // TODO Process favorites
+                }
         }
 
         operator fun getValue(thisRef: ViewModel, property: KProperty<*>): DataFactory = this
-    }
-
-    sealed class TvSeriesViewModelEvents {
-        class OnItemClicked(val id: Int) : TvSeriesViewModelEvents()
     }
 }
 

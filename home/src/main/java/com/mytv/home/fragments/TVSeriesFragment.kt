@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -22,6 +21,7 @@ import com.mytv.home.viewModels.TVSeriesViewModel
 import com.mytv.home.widget.TVSeriesHorizontalItem
 import com.mytv.series.base.images.BaseImageLoader
 import com.mytv.series.base.images.ImageConfigurationType
+import com.mytv.series.base.listeners.OnFragmentInteraction
 import com.mytv.series.base.ui.generics.BasePagedListAdapter
 import com.mytv.series.base.ui.generics.RecyclerItem
 import com.mytv.series.base.ui.generics.ViewHolder
@@ -73,9 +73,6 @@ class TVSeriesFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(TVSeriesViewModel::class.java)
         viewModel.itemsLiveData.observe(viewLifecycleOwner, Observer(itemsAdapter::submitList))
-        viewModel.eventsLiveData.observe(viewLifecycleOwner, Observer {
-            Toast.makeText(context, getString(R.string.home_detail_explanation), Toast.LENGTH_SHORT).show()
-        })
         activity?.lifecycle?.addObserver(viewModel)
     }
 
@@ -110,11 +107,18 @@ class TVSeriesFragment : Fragment() {
                 imageWidth,
                 imageConfiguration
             )
-            holderItemView.setOnClickListener { viewModel.onItemClicked(item.id) }
+            holderItemView.setOnClickListener {
+                // TODO Add different listener for favorites
+                (activity as OnFragmentInteraction).onItemClicked(FRAGMENT_NAME, item.id.toString())
+            }
         }
 
         override fun updateBind(item: String) = Unit
 
+    }
+
+    companion object {
+        const val FRAGMENT_NAME = "tv_series"
     }
 
 }
